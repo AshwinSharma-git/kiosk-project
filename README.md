@@ -19,13 +19,7 @@ To create a public-facing digital Kiosk System for ISRO that:
 - Offers an **offline-ready intelligent chatbot**.
 - Supports real-time administrative control.
 
----
 
-## 📸 Project Preview
-
-![Home Page UI](assets/kiosk-preview.png)
-
----
 
 ## 🧩 Complete Module Breakdown
 
@@ -194,7 +188,7 @@ Access the kiosk at:
 
 **Ashwin Sharma**
 ISRO Intern | B.Tech ECE | Full-stack Learner
-📧 [ashwinsharmaofficial@gmail.com](mailto:ashwinsharmaofficial@gmail.com)
+📧 [ashwinsharmaofficial@gmail.com](mailto:sharmaashwin880@gmail.com)
 🔗 [GitHub](https://github.com/AshwinSharma-git) | [LinkedIn](https://www.linkedin.com/in/ashwinsharma-git/)
 
 ---
