@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='virtual_tour.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="virtual-tour-wrapper">
+    <div class="virtual-tour-container">
+        <h1 class="tour-title">ISRO Virtual Experience</h1>
+        
+        <!-- Tour Navigation -->
+        <div class="tour-nav">
+            <button class="nav-btn active" data-section="launches">Launch Vehicles</button>
+            <button class="nav-btn" data-section="missions">Space Missions</button>
+            <button class="nav-btn" data-section="facilities">Research Facilities</button>
+            <button class="nav-btn" data-section="achievements">Achievements</button>
+        </div>
+
+        <!-- Launch Vehicles Section -->
+        <section class="tour-section active" id="launches">
+            <div class="section-content">
+                <h2>Launch Vehicles</h2>
+                <div class="media-grid">
+                    <div class="media-card">
+                        <div class="media-container">
+                            <video class="tour-video" controls>
+                                <source src="{{ url_for('static', filename='videos/gsat-11-english.mp4.mp4') }}" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-content">
+                            <h3>GSAT-11 Launch</h3>
+                            <p>Watch the successful launch of GSAT-11, India's heaviest satellite.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Space Missions Section -->
+        <section class="tour-section" id="missions">
+            <div class="section-content">
+                <h2>Space Missions</h2>
+                <div class="media-grid">
+                    <div class="media-card">
+                        <div class="media-container">
+                            <video class="tour-video" controls>
+                                <source src="{{ url_for('static', filename='videos/Mangalyan-Jan-2017 (1).mp4') }}" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-content">
+                            <h3>Mangalyaan Mission</h3>
+                            <p>India's historic Mars Orbiter Mission showcasing our leap into interplanetary exploration.</p>
+                        </div>
+                    </div>
+                    <div class="media-card">
+                        <div class="media-container">
+                            <video class="tour-video" controls>
+                                <source src="{{ url_for('static', filename='videos/working_models/chandrayaan3.mp4') }}" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-content">
+                            <h3>Chandrayaan-3</h3>
+                            <p>Experience India's successful lunar landing mission.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Facilities Section -->
+        <section class="tour-section" id="facilities">
+            <div class="section-content">
+                <h2>Research Facilities</h2>
+                <div class="media-grid">
+                    <div class="media-card">
+                        <div class="media-container">
+                            <video class="tour-video" controls>
+                                <source src="{{ url_for('static', filename='videos/Antarctica_Bharti_31Jan2016.mp4') }}" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-content">
+                            <h3>Research Stations</h3>
+                            <p>Explore ISRO's research facilities including our Antarctic station.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section class="tour-section" id="achievements">
+            <div class="section-content">
+                <h2>Achievements</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="media-container">
+                            <img src="{{ url_for('static', filename='images/future/adityal2.jpg') }}" alt="Aditya L2">
+                        </div>
+                        <div class="timeline-content">
+                            <h3>2024: Aditya-L2 Mission</h3>
+                            <p>India's first solar observatory in space.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="media-container">
+                            <img src="{{ url_for('static', filename='images/working_models/chandrayaan3-thumb.jpg') }}" alt="Chandrayaan 3">
+                        </div>
+                        <div class="timeline-content">
+                            <h3>2023: Chandrayaan-3</h3>
+                            <p>Successful soft-landing on the Moon's South Pole.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='virtual_tour.js') }}"></script>
+{% endblock %}
