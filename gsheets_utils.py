@@ -1,29 +1,49 @@
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-import datetime
 import os
+import json # <--- ADDED THIS IMPORT
+from oauth2client.service_account import ServiceAccountCredentials # Keep this if other parts of your code might use it, but not directly used for env var loading
+import datetime
 
-# Define the scope and credentials
-SCOPE = ['https://spreadsheets.google.com/feeds',
-         'https://www.googleapis.com/auth/drive']
-CREDS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 
-                         'credentials', 'isro-kiosk-credentials.json')
+# Removed CREDS_PATH as we will now use environment variables
 
 def get_google_sheets_client():
-    """Get authenticated Google Sheets client"""
+    """
+    Get authenticated Google Sheets client using credentials from environment variables.
+    This function is designed for secure deployment on platforms like Render.
+    """
     try:
-        creds = ServiceAccountCredentials.from_json_keyfile_name(CREDS_PATH, SCOPE)
-        return gspread.authorize(creds)
+        # Get the JSON string of your credentials from the environment variable
+        credentials_json_string = os.environ.get("GOOGLE_CREDENTIALS_JSON_STRING")
+
+        if credentials_json_string:
+            # If the environment variable exists, parse the JSON string into a Python dictionary
+            credentials_data = json.loads(credentials_json_string)
+            
+            # Authenticate gspread using the dictionary data
+            gc = gspread.service_account_from_dict(credentials_data)
+            return gc
+        else:
+            # If the environment variable is not found, it's a critical error for deployment.
+            # For local development, you might have a fallback (e.g., from a local file
+            # that is in your .gitignore), but for Render, this variable MUST be set.
+            print("ERROR: GOOGLE_CREDENTIALS_JSON_STRING environment variable not found.")
+            raise RuntimeError("Google Sheets credentials are not configured. Deployment will fail.")
+
     except Exception as e:
-        print(f"Error authenticating: {str(e)}")
-        return None
+        print(f"Error authenticating Google Sheets client: {str(e)}")
+        # Re-raise the exception to ensure the calling function knows authentication failed
+        raise
 
 def append_to_sheet(data_row):
-    """Append a row of data to the Google Sheet"""
+    """
+    Append a row of data to the Google Sheet.
+    It now gets the client securely via get_google_sheets_client().
+    """
     try:
-        client = get_google_sheets_client()
+        client = get_google_sheets_client() # Get the authenticated client
         # Open the spreadsheet by its title
-        sheet = client.open('ISRO_Kiosk_Feedback').sheet1
+        # IMPORTANT: Replace 'ISRO_Kiosk_Feedback' with the EXACT name of your Google Spreadsheet
+        sheet = client.open('ISRO_Kiosk_Feedback').sheet1 
         sheet.append_row(data_row)
         return True
     except Exception as e:
@@ -31,7 +51,9 @@ def append_to_sheet(data_row):
         return False
 
 def get_filtered_data(filters=None):
-    """Get data from sheet with optional filters
+    """
+    Get data from sheet with optional filters.
+    It now gets the client securely via get_google_sheets_client().
     filters can include:
     - date_from: datetime
     - date_to: datetime
@@ -39,7 +61,9 @@ def get_filtered_data(filters=None):
     - role: str
     """
     try:
-        client = get_google_sheets_client()
+        client = get_google_sheets_client() # Get the authenticated client
+        # Open the spreadsheet by its title
+        # IMPORTANT: Replace 'ISRO_Kiosk_Feedback' with the EXACT name of your Google Spreadsheet
         sheet = client.open('ISRO_Kiosk_Feedback').sheet1
         
         # Get all data including headers
@@ -54,6 +78,7 @@ def get_filtered_data(filters=None):
             
             # Apply date filter
             if 'date_from' in filters or 'date_to' in filters:
+                # Ensure 'Timestamp' column exists in your sheet and format matches
                 row_date = datetime.datetime.strptime(row['Timestamp'], '%Y-%m-%d %H:%M:%S')
                 
                 if 'date_from' in filters and row_date < filters['date_from']:
