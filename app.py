@@ -14,8 +14,8 @@ STATIC_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static
 app.static_folder = STATIC_FOLDER
 
 # Admin credentials from environment variables
-ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')
-ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'isro2025')
+ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'set ur username')
+ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'set ur password')
 
 # Login decorator
 def login_required(f):
@@ -320,23 +320,6 @@ User's query: {query}
         return f"Error occurred: {e}"
 
 
-# def get_openai_response(query: str) -> str:
-#     """Use local Ollama LLM to get a response for unknown queries."""
-#     try:
-#         ollama_url = "http://localhost:11434/api/generate"
-#         payload = {
-#             "model": "llama3.2",  # change to your model if needed
-#             "prompt": f"You are ISRO Space Assistant. {query}",
-#             "stream": False
-#         }
-
-#         response = requests.post(ollama_url, json=payload)
-#         result = response.json()
-
-#         return result.get("response", "I'm sorry, I couldn't fetch a proper response.")
-    
-#     except Exception as e:
-#         return f"Oops! Local LLM failed to respond. Error: {str(e)}"
     
 def get_chat_response(message: str) -> str:
     """Get response for user message using knowledge base or OpenAI."""
