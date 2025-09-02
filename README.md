@@ -188,8 +188,8 @@ Access the kiosk at:
 
 **Ashwin Sharma**
 ISRO Intern | B.Tech ECE | Full-stack Learner
-📧 [ashwinsharmaofficial@gmail.com](mailto:sharmaashwin880@gmail.com)
-🔗 [GitHub](https://github.com/AshwinSharma-git) | [LinkedIn](https://www.linkedin.com/in/ashwinsharma-git/)
+📧 [sharmaashwin880@gmail.com](mailto:sharmaashwin880@gmail.com)
+🔗 [GitHub](https://github.com/AshwinSharma-git) | [LinkedIn](https://www.linkedin.com/in/ashwinsharma2/)
 
 ---
 
